@@ -1,0 +1,4 @@
+# 검증 환경(2026-06): Python 3.12 / Windows 11 / Microsoft Office 2016+ (Word 16.0)
+mcp>=1.28.0
+pywin32>=306
+# mcp가 자동 설치: anyio, pydantic, httpx, starlette, uvicorn 등
