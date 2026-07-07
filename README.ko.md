@@ -18,8 +18,8 @@ Word.Application 데스크톱을 COM으로 자동화해, **라이브러리(pytho
 ## 설치
 
 ```powershell
-git clone https://github.com/Feynman520/word-engine-mcp.git
-cd word-engine-mcp
+git clone https://github.com/Feynman520/d01-p04-word-engine-mcp.git
+cd d01-p04-word-engine-mcp
 py -3.12 -m venv .venv          # 또는: python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
