@@ -8,7 +8,7 @@ iris_uno.py — LibreOffice 안에서 도는 UNO 작업 모음(macOS 엔진, IRI
 스스로 부르게 한다(engine/lo_bridge.py). 작업 내용은 환경변수 IRIS_LO_JOB(JSON 파일)로 받고, 결과는
 IRIS_LO_RESULT(JSON 파일)에 쓴다. 무슨 일이 있어도 끝에 데스크톱을 닫는다(soffice 가 남지 않게).
 
-이 파일은 엑셀·PPT·워드 MCP 세 저장소에 **글자까지 같은** 사본으로 들어 있다(각 저장소는 따로 배포된다).
+이 파일은 엑셀·PPT·워드·한글 MCP 네 저장소에 **글자까지 같은** 사본으로 들어 있다(각 저장소는 따로 배포된다).
 """
 import json
 import os
@@ -287,8 +287,10 @@ def writer_convert(office, job):
         raise ValueError("지원하지 않는 출력 확장자: %s (가능: %s)" % (ext, ", ".join(sorted(CONVERT_FILTERS))))
     if not os.path.exists(job["src"]):
         raise FileNotFoundError("원본을 찾을 수 없습니다: %s" % job["src"])
-    doc = office.desktop.loadComponentFromURL(_url(job["src"]), "_blank", 0, _props(
-        Hidden=True, ReadOnly=True, UpdateDocMode=0, MacroExecutionMode=0, RepairPackage=bool(job.get("repair"))))
+    load = dict(Hidden=True, ReadOnly=True, UpdateDocMode=0, MacroExecutionMode=0, RepairPackage=bool(job.get("repair")))
+    if job.get("import_filter"):  # 예: HTML 을 웹 문서가 아니라 일반 문서로 열기("HTML (StarWriter)") — PDF 필터가 다르다
+        load["FilterName"] = job["import_filter"]
+    doc = office.desktop.loadComponentFromURL(_url(job["src"]), "_blank", 0, _props(**load))
     if doc is None:
         raise RuntimeError("LibreOffice 가 문서를 열지 못했습니다: %s" % job["src"])
     try:

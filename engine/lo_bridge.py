@@ -17,7 +17,7 @@ LibreOffice 로 처리한다. 실제 작업은 soffice 안에서 도는 UNO 매�
 `LoSession` 은 engine/session.py 의 세션과 같은 모양(start/stop/alive/run(fn))이라 server.py 는 엔진만 고르면 된다.
 `run(fn)` 의 fn 은 `LoBridge` 를 받는다(COM 의 app 자리).
 
-이 파일은 엑셀·PPT·워드 MCP 세 저장소에 글자까지 같은 사본으로 들어 있다.
+이 파일은 엑셀·PPT·워드·한글 MCP 네 저장소에 글자까지 같은 사본으로 들어 있다(한글 MCP 는 HWPX 의 근사 PDF 에만 쓴다).
 """
 from __future__ import annotations
 
