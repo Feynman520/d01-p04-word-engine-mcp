@@ -1,4 +1,5 @@
 # 검증 환경(2026-06): Python 3.12 / Windows 11 / Microsoft Office 2016+ (Word 16.0)
 mcp>=1.28.0
-pywin32>=306
+pywin32>=306; sys_platform == "win32"
 # mcp가 자동 설치: anyio, pydantic, httpx, starlette, uvicorn 등
+# macOS: LibreOffice(무료, 별도 설치)를 화면 없이 띄워 같은 도구를 처리한다 — Python 의존성 추가 없음(README 「macOS」).

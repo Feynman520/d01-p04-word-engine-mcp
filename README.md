@@ -17,6 +17,19 @@ A local MCP server that drives the **real Word desktop application** (COM automa
 - Python 3.10+ — verified on **3.12**
 - [Claude Code](https://claude.com/claude-code) or any MCP client
 
+## macOS (LibreOffice engine)
+
+On macOS there is no COM, so the same eight tools run on **LibreOffice** (free, MPL-2.0) in headless mode:
+`server.py` picks `engine/lo_document.py` + `engine/lo_bridge.py` instead of the COM session.
+
+- Install LibreOffice (`brew install --cask libreoffice`, or from libreoffice.org). `IRIS_SOFFICE` may point at another `soffice`.
+- Each call starts `soffice` once with a private profile (`.lo-profile/`, or `IRIS_LO_PROFILE_DIR`) and runs a UNO macro
+  (`engine/lo_macro/iris_uno.py`) inside it; the bridge hands headless LibreOffice the macOS system fonts (Korean included).
+- Differences from Word: layout is LibreOffice Writer's (line and page breaks can differ slightly); `readability` is always
+  `null`; no `.mht`/`.xps` output; mail merge fills `MERGEFIELD`s per record and joins the copies with page breaks
+  (no `IF`/`NEXT` rules); compare writes tracked changes under the given `author` with word or character granularity.
+- Check: `python tests/lo_engine.py` (16 checks over all six tasks).
+
 ## Install
 
 ```powershell

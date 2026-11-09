@@ -6,3 +6,5 @@ tests/_out/
 .env
 .env.local
 .vercel
+.lo-profile/
+__pycache__/

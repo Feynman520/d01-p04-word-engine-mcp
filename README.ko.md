@@ -15,6 +15,19 @@ Word.Application 데스크톱을 COM으로 자동화해, **라이브러리(pytho
 - Python 3.10+ — 검증: **3.12**
 - [Claude Code](https://claude.com/claude-code) 또는 임의의 MCP 클라이언트
 
+## macOS (LibreOffice 엔진)
+
+macOS 에는 COM 이 없어 같은 도구 8개를 **LibreOffice**(무료, MPL-2.0)를 화면 없이 띄워 처리한다 —
+`server.py` 가 COM 세션 대신 `engine/lo_document.py` + `engine/lo_bridge.py` 를 고른다.
+
+- LibreOffice 설치(`brew install --cask libreoffice` 또는 libreoffice.org). 다른 `soffice` 는 `IRIS_SOFFICE` 로 지정.
+- 호출마다 전용 프로필(`.lo-profile/` 또는 `IRIS_LO_PROFILE_DIR`)로 `soffice` 를 한 번 띄우고 그 안에서 UNO 매크로
+  (`engine/lo_macro/iris_uno.py`)를 돌린다. 화면 없는 LibreOffice 가 macOS 시스템 글꼴(한글 포함)을 보도록 다리가 넘긴다.
+- Word 와 다른 점: 조판은 LibreOffice Writer 가 한다(줄·쪽 나눔이 조금 다를 수 있음) · `readability` 는 늘 `null` ·
+  `.mht`/`.xps` 출력 없음 · 메일 머지는 레코드마다 `MERGEFIELD` 를 채운 사본을 쪽 나눔으로 잇는다(`IF`/`NEXT` 규칙 없음) ·
+  비교는 지정한 `author` 이름과 단어/문자 단위로 변경 추적을 남긴다.
+- 검사: `python tests/lo_engine.py`(여섯 작업 16개 검사).
+
 ## 설치
 
 ```powershell

@@ -26,10 +26,18 @@ from typing import Any, Optional
 import anyio
 from mcp.server.fastmcp import FastMCP
 
-from engine import compare as compare_mod
-from engine import document
-from engine import mailmerge as mailmerge_mod
-from engine.session import WordSession
+import sys
+
+if sys.platform == "win32":
+    from engine import compare as compare_mod
+    from engine import document
+    from engine import mailmerge as mailmerge_mod
+    from engine.session import WordSession
+else:
+    # macOS: Word COM 이 없다 — 같은 도구를 LibreOffice(무료) Writer 엔진으로 처리한다(engine/lo_bridge.py).
+    from engine import lo_document as document
+    compare_mod = mailmerge_mod = document  # lo_document 에 compare()·mail_merge() 도 있다
+    from engine.lo_bridge import LoSession as WordSession
 
 # ---- 단일 세션 관리(지연 초기화) -------------------------------------------
 _session: Optional[WordSession] = None
@@ -71,6 +79,8 @@ mcp = FastMCP(
         "목차/필드 갱신 → word_read_layout으로 실제 페이지 수 확인 → word_export_pdf로 PDF 출력. "
         "그 외 word_convert(포맷변환·복구), word_compare(redline 비교), word_mail_merge(메일머지). "
         "경로는 절대경로 권장. 원본은 보존되며 결과는 out_path로 저장된다."
+        + ("" if sys.platform == "win32" else
+           " (macOS: Word 대신 LibreOffice Writer 엔진으로 조판·변환한다. 가독성 통계·MHT/XPS 출력은 없다.)")
     ),
 )
 
