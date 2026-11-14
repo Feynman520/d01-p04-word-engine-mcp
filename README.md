@@ -92,3 +92,7 @@ environments show Word's SQL confirmation prompt (depends on an HKCU setting).
 ## License
 
 [MIT](LICENSE)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute and [SECURITY.md](SECURITY.md) for reporting security issues.

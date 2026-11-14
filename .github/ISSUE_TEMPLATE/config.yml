@@ -1,0 +1,9 @@
+# 원본(source): https://github.com/Feynman520/iris-community — 여기서 고치지 말고 원본을 고칩니다.
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub 계정 없이 의견 보내기 (Feedback without a GitHub account)
+    url: https://iris-workspace.com/feedback
+    about: 홈페이지 의견함으로 보내면 관리자만 봅니다.
+  - name: 기여 안내 (How to contribute)
+    url: https://github.com/Feynman520/iris-community/blob/main/CONTRIBUTING.md
+    about: 저장소마다 받는 것이 다릅니다. PR을 내기 전에 표를 봐 주세요.

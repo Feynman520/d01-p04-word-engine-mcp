@@ -1,0 +1,46 @@
+# 원본(source): https://github.com/Feynman520/iris-community — 여기서 고치지 말고 원본을 고칩니다.
+name: 고장 신고 (Bug report)
+description: 잘 되던 것이 안 되거나, 설명과 다르게 움직일 때 (Something is broken)
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        한국어·영어 모두 좋습니다. **보안 문제는 여기에 쓰지 말고** 이 저장소의 Security 탭 → Report a vulnerability로 알려 주세요.
+        이름·연락처·학교 이름·비밀 값은 적지 마세요. (Do not include personal data or secrets.)
+  - type: input
+    id: version
+    attributes:
+      label: 판 (Version)
+      description: IRIS 창 설정 맨 아래에 보이는 판 번호, 설치 패키지 판 번호
+      placeholder: "IRIS 창 2.106.0 / 설치 패키지 2.0.64"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 무엇을 했나요 (Steps)
+      description: 따라 할 수 있게 순서대로 적어 주세요.
+      placeholder: |
+        1. …
+        2. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 어떻게 되길 기대했나요 (Expected)
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제로는 어떻게 되었나요 (Actual)
+      description: 화면에 뜬 글귀가 있으면 그대로 적어 주세요. 화면 사진을 붙일 때는 개인정보가 보이지 않는지 확인해 주세요.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 운영체제 (OS)
+      placeholder: "Windows 11"
